@@ -27,7 +27,6 @@ def get_arguments() -> dict:
 
 
 def getting_the_year_from_the_name(data: list, column: str, new_column: str, re_data: str, new_re_data: str) -> list:
-
     for row in data:
         if re.search(new_re_data, row[column]):  # looking for a year with regular degeneration
             new_col_val = re.search(new_re_data, row[column]).group()
@@ -42,7 +41,6 @@ def getting_the_year_from_the_name(data: list, column: str, new_column: str, re_
 
 
 def filter_data_by_year(data: list, column: str, start=None, end=None) -> list:
-
     filtered_data = []
     if start and end:
         if start > end:
@@ -76,7 +74,6 @@ def filter_data_by_year(data: list, column: str, start=None, end=None) -> list:
 
 
 def sort_by_match(data: list, column: str, sort_text: str) -> list:
-
     filtered_data = []
 
     for line in data:
@@ -87,6 +84,9 @@ def sort_by_match(data: list, column: str, sort_text: str) -> list:
 
 
 def print_data_csv(data: list, n_rows=None):
+    if n_rows and len(data) >= n_rows:
+        data = data[:n_rows]
+
     print(', '.join(getting_a_column(data)))
 
     for row in data:
@@ -121,6 +121,7 @@ def getting_an_average_rating_for_a_movie(file_path: str, id_grop: str, rating: 
 
     return data
 
+
 def getting_a_column(data: list) -> list:
     columns = data[0].keys()
     return columns
@@ -133,33 +134,27 @@ def devided_data(data: list, start=None, end=None) -> list:
         data = data[:end]
     return data
 
-def merging_dictionaries(left_movies: list, right_ratings: list, connection: str) -> list:
 
-    columns_right = right_ratings[0].keys()
-    right_none = {e: None for e in columns_right if e != connection}
-    merged_data = []
-    data_r_start = 0
-
-    for line_left in left_movies:
-        merged_line = {**line_left, **right_none}
-        for temp in range(data_r_start, len(right_ratings)):
-
-            if line_left[connection] == right_ratings[temp][connection]:
-                merged_line = {**line_left, **right_ratings[temp]}
-                data_r_start = temp
+def merging_dictionaries(movies: list, ratings: list, connection: str) -> list:
+    merged_list = []
+    count = 0
+    for movie in movies:
+        for item in range(count, len(ratings)):
+            if movie[connection] == ratings[item][connection]:
+                dct = dict(movie, **ratings[item])
+                merged_list.append(dct)
+                count += 1
                 break
 
-        merged_data.append(merged_line)
-
-    return merged_data
+    return merged_list
 
 
 def main():
-    args = get_arguments()                                               #get arguments
-    movies = reading_csv_file('movies.csv')                              #reading from file
+    args = get_arguments()  # get arguments
+    movies = reading_csv_file('movies.csv')  # reading from file
     movies = getting_the_year_from_the_name(movies, 'title', 'year', "\d\d\d\d", "\d\d\d\d")
 
-    movies = filter_data_by_year(                                        #sorting data by year
+    movies = filter_data_by_year(  # sorting data by year
         movies, 'year',
         start=args['year_from'],
         end=args['year_to']
