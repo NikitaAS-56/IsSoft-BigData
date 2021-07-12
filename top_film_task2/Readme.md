@@ -9,7 +9,7 @@ This script allows user to get information about top rated films.
 
 *  `--help` show help message and exit
 *  `-N`,  the number of top rated movies for each genre. *(3)*
-*   `--genres` user-defined genre filter. can be multiple. *("Comedy|Adventure")
+*   `--genres` user-defined genre filter. can be multiple. *("Comedy|Adventure")*
 *   `--year_from` the lower boundary of year filter *( 1980)*
 *   `--year_to` the lower boundary of year filter *(2010)*
 *   `--regexp` filter on name of the film *(love)*
@@ -37,6 +37,7 @@ For example, to get  top 3 films about "Monster" use command:
 python movies.py --N 3 --regexp Monster
 ```
 Output:
+
 ```
 movieId, title, genres, year, rating
 136353,Scooby-Doo! and the Loch Ness Monster (),Animation|Children|Comedy,2004,5.0
@@ -52,7 +53,8 @@ Use `--year_from` and `year_to` to determinate movie\`s year range.
 python movies.py --N 4  --year_from 2001 --year_to 2002
 ```
 Output:
-```movieId, title, genres, year, rating
+```
+movieId, title, genres, year, rating
 27373,61* (),Drama,2001,5.0
 27523,My Sassy Girl (Yeopgijeogin geunyeo) (),Comedy|Romance,2001,5.0
 44943,9/11 (),Documentary,2002,5.0
@@ -76,5 +78,4 @@ movieId, title, genres, year, rating
 112512,Colourful (Karafuru) (),Animation|Drama|Fantasy|Mystery,2010,5.0
 113829,One I Love, The (),Comedy|Drama|Romance,2014,5.0
 120130,Into the Forest of Fireflies' Light (),Animation|Drama|Fantasy,2011,5.0
-
 ```
