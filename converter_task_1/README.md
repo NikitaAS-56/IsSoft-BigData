@@ -3,10 +3,11 @@
 
 #Files converter
 This is a console utility that supports command line arguments.</br>
-With this utility you can convert .csv to .parquet and back. You can also get parquet schema</br>
-`python convert.py [--csv2parquet | â€”parquet2csv <src-filename> <dst-filename>] | [--get-schema <filename>] | [--help]`</br>
+With this utility you can convert .csv to .parquet and back. You can also get parquet schema</br>  
+
+`python convert.py [--csv2parquet | —parquet2csv <src-filename> <dst-filename>] | [--get-schema <filename>] | [--help]`</br>
 The utility supports the following functions
-- `convert` - convert csv to convert and convert convert to csv
+- `convert` - convert csv to parquet and convert parquet to csv
 
 - `get_schema` - returns schema of parquet file
 
@@ -26,20 +27,20 @@ Assume that you have some data in your `data.csv` file:
 
 need to convert some `data.csv` file to `parquet`, so you need to write the following command:
 ```
-$python convertor.py --csv2parquet data.csv output.parquet
+$python converter.py --csv2parquet data.csv output.parquet
 ```
 And you receive new file `output.parquet` in your directory
 
 ### Convert Parquet to CSV
 You can specify `--parquet2csv` parameter in order to convert `output.parquet` file back to csv
 ```
-$python convertor.py --parquet2csv output.parquet convert_output.csv
+$python converter.py --parquet2csv output.parquet convert_output.csv
 ```
 
 ### Get Parquet schema
 There are some cases when you need to know the schema of your Parquet file. For example:
 ```
-$python convertor.py --schema_parquet data_converted.parquet
+$python converter.py --schema_parquet output.parquet
 ```
 The script produces the following output:
 ```
