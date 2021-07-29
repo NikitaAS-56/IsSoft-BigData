@@ -1,4 +1,5 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `usp_find_top_rated_movies`(
+Delimiter $$
+CREATE  PROCEDURE usp_find_top_rated_movies(
     IN n INT,
     IN `regexp` VARCHAR(200),
     IN year_from INT,
@@ -32,4 +33,5 @@ BEGIN
             AND ((`regexp` IS NULL) OR (REGEXP_SUBSTR(m.title,`regexp`) != ''))
             AND REGEXP_SUBSTR(m.genre, genres) != ''
         ORDER BY m.rating DESC, m.movieYear DESC LIMIT n;
-END
+END$$
+Delimiter ;

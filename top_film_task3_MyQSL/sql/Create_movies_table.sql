@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS movies
+DROP TABLE IF EXISTS movies;
 CREATE TABLE movies (
   movieId int(20) ,
   title varchar(256) NOT NULL,

@@ -6,12 +6,12 @@ CREATE VIEW view_ratings AS
         m.title,
         m.genres,
         m.movieYear,
-        round(AVG(r.rating),2) AS 'rating'
+        round(AVG(r.rating),2)AS 'rating'
     FROM
-        movies_table AS m_t
-    INNER JOIN ratings_table AS r_t ON m_t.movieId = r_t.movieId
+        movies AS m
+    INNER JOIN ratings AS r ON m.movieId = r.movieId
     GROUP BY
-        m_t.movieId,
-        m_t.title,
-        m_t.genres,
-        m_t.movieYear;
+        m.movieId,
+        m.title,
+        m.genres,
+        m.movieYear;
