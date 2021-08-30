@@ -30,26 +30,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-
-
-
-
-
-
-
-
-
-
-           # print(r"{}; {}".format(result_key, str(x)))
-            # print(result_key + "\t" + str(result_value))
-    #print(group[0])
-    # for group in csv.reader(sys.stdin.readlines()):
-
-        # for key, values in group:
-        #     # print(key,values)
-        #     result_key, result_value = reduce(key, values, args["N"])
-        #
-        #     for i in range(args["N"]):
-        #         print(result_key + "\t", result_value)

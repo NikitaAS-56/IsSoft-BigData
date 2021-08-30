@@ -116,13 +116,6 @@ def main():
         key, value = x[0], '; '.join(x[1])
         print("{}\t{}".format(key, value))
 
-       # for group in sh.shuffle(pairing(movies,args)):
-    #
-    #     for key, values in group:
-    #         # print(key,values)
-    #         result_key, result_value = rd.reduce(key, values, args["N"])
-    #
-    #         for i in range(args["N"]):
-    #             print(result_key + "\t", (x for x in result_value[i]))
+
 if __name__ == '__main__':
     main()

@@ -1,84 +1,53 @@
-#!/bin/bash
+function print_help() {
+    echo "--N - Number of top rated movies for each genre"
+    echo "--regexp - Filter movies by title"
+    echo "--year_from - Filter movies by year starting from --year_from"
+    echo "--year-to - Filter movies by year ending --year_to"
+    echo "--genres - Filter movies by genre"
+}
 
- cat movies.csv | python mapper.py --year_from 1993 --year_to 2010 --genre "War|Western" --regexp The | python redyce.py
-
-while  (("$#")); do
+while [ -n "$1" ]
+do
   case "$1" in
-    --help)
-        echo "Help"
-        exit 1
-        ;;
+
     --N)
-      if [-v "$2"] && [${2:0:1}  !="-"]; then
+      if [ -n "$2" ] && [ ${2:0:1} != "-" ]; then
         n_flag=$1
         n_value=$2
-        echo "$1 $2"
+
         shift 2
-
-      else
-          echo "Eror1 $1"
-            echo "$1 $2"
-          exit 1
-          fi ;;
-
-    --year_from)
-      if [-v "$2"] && [${2:0:1}  !="-"]; then
-        yf_flag=$1
-        yf_value=$2
-          echo "$1 $2"
-        shift 2
-
-      else
-          echo "Eror2"
-            echo "$1 $2"
-          exit 1
-          fi ;;
-
-    --year_to)
-      if [-v "$2"] && [${2:0:1}  !="-"]; then
-        yt_flag=$1
-        yt_value=$2
-          echo "$1 $2"
-        shift 2
-
-      else
-          echo "Eror3"
-            echo "$1 $2"
-          exit 1
-          fi ;;
-
+      fi;;
     --regexp)
-      if [-v "$2"] && [${2:0:1}  !="-"]; then
-        rg_flag=$1
-        rg_value=$2
-          echo "$1 $2"
+      if [ -n "$2" ] && [ ${2:0:1} != "-" ]; then
+        regexp_flag=$1
+        regexp_value=$2
         shift 2
-
-      else
-          echo "Eror4"
-            echo "$1 $2"
-          exit 1
-
-          fi ;;
-
+      fi;;
+    --year_from)
+      if [ -n "$2" ] && [ ${2:0:1} != "-" ]; then
+        year_from_flag=$1
+        year_from_value=$2
+        shift 2
+      fi;;
+    --year_to)
+      if [ -n "$2" ] && [ ${2:0:1} != "-" ]; then
+        year_to_flag=$1
+        year_to_value=$2
+        shift 2
+      fi;;
     --genres)
-      if [-v "$2"] && [${2:0:1}  !="-"]; then
-        g_flag=$1
-        g_value=$2
-          echo "$1 $2"
+      if [ -n "$2" ] && [ ${2:0:1} != "-" ]; then
+        genres_flag=$1
+        genres_value=$2
         shift 2
-
-      else
-          echo "Eror5 "
-            echo " \"$2\" "
-          exit 1
-          fi ;;
-    *)
-        exit 1
-        ;;
-    esac
+      fi;;
+    *) print_help;
+            exit 1;;
+  esac
 done
 
+
 cat movies.csv \
-|python mapper.py $yf_flag $yf_value $yt_flag $yt_value $rg_flag $rg_value $g_flag \"$g_value\" \
-|python redyce.py $n_flag $n_value
+| python mapper.py $regexp_flag $regexp_value $year_from_flag $year_from_value $year_to_flag $year_to_value $genres_flag $genres_value \
+| python redгce.py $n_flag $n_value
+
