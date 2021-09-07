@@ -49,5 +49,5 @@ done
 
 cat movies.csv \
 | python mapper.py $regexp_flag $regexp_value $year_from_flag $year_from_value $year_to_flag $year_to_value $genres_flag $genres_value \
-| python redгce.py $n_flag $n_value
+| python reducer.py $n_flag $n_value
 

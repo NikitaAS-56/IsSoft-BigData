@@ -113,7 +113,8 @@ def main():
     movies = getting_the_year_from_the_name(movies, 'title', 'year', '\(\d\d\d\d\)', '\d\d\d\d')
 
     for x in pairing(movies, args):
-        key, value = x[0], '; '.join(x[1])
+        key, value = x[0], x[1]
+
         print("{}\t{}".format(key, value))
 
 

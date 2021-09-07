@@ -1,9 +1,12 @@
 #!/bin/bash
 
-if ! [ -f tmp/movies.csv ]; then
-  hdfs dfs -put tmp/movies.py
+if ! [ -d /tmp/data ]; then
+  hdfs dfs -mkdir /tmp/data
 fi
 
+if ! [ -f /tmp/data/movies.csv ]; then
+  hdfs dfs -put movies.py /tmp/data
+fi
 
 function print_help() {
     echo "--N - Number of top rated movies for each genre"
@@ -57,8 +60,8 @@ if [ -d /result ]; then
 fi
 
 
-yarn jar hadoop-streaming-3.2.2.jar -input /tmp/movies.csv \
+yarn jar hadoop-streaming-3.2.2.jar -input /tmp/data/movies.csv \
   -output /result/output \
-  -file mapper.py reduce.py \
+  -file mapper.py reducer.py \
   -mapper "python3 mapper.py $regexp_flag $regexp_value $year_from_flag $year_from_value $year_to_flag $year_to_value $genres_flag $genres_value" \
-  -reducer "python3 reduce.py $n_flag $n_value"
+  -reducer "python3 reducer.py $n_flag $n_value"
