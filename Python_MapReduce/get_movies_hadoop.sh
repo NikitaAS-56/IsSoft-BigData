@@ -5,7 +5,7 @@ if ! [ -d /tmp/data ]; then
 fi
 
 if ! [ -f /tmp/data/movies.csv ]; then
-  hdfs dfs -put movies.py /tmp/data
+  hdfs dfs -put movies.csv /tmp/data
 fi
 
 function print_help() {
